@@ -52,6 +52,12 @@
     button:hover {
       background-color: #218838;
     }
+    #mensagem {
+      margin-top: 15px;
+      font-weight: bold;
+      color: blue;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -66,85 +72,30 @@
     <label for="presente">Escolha um presente:</label>
     <select id="presente" name="presente" required>
       <option value="">Selecione...</option>
-      <option>Abajur</option>
-      <option>Abridor de latas e garrafas</option>
-      <option>Abridor de vinho e garrafas</option>
-      <option>Afiador de facas</option>
-      <option>Assadeira</option>
-      <option>Batedeira</option>
-      <option>Cafeteira</option>
-      <option>Capacho</option>
-      <option>Cesta para pães</option>
-      <option>Cesto de roupas</option>
-      <option>Colher de pau</option>
-      <option>Concha</option>
-      <option>Cortador de legumes</option>
-      <option>Cortador de pizza</option>
-      <option>Descascador de legumes</option>
-      <option>Escorredor de macarrão</option>
-      <option>Escorredor de pratos</option>
-      <option>Escumadeira</option>
-      <option>Espátula de silicone</option>
-      <option>Espátula</option>
-      <option>Espremedor de frutas</option>
-      <option>Forma de bolo</option>
-      <option>Forma de pizza</option>
-      <option>Forma de pudim / bolo</option>
-      <option>Frigideira</option>
-      <option>Fruteira</option>
-      <option>Galheteiro</option>
-      <option>Garrafa térmica</option>
-      <option>Guardanapos</option>
-      <option>Jarro d'água e suco</option>
-      <option>Jogo americano</option>
-      <option>Jogo de copos</option>
-      <option>Jogo de facas</option>
-      <option>Jogo de panelas</option>
-      <option>Jogo de pratos</option>
-      <option>Jogo de talheres</option>
-      <option>Jogo de xícaras</option>
-      <option>Liquidificador</option>
-      <option>Lixeira de banheiro / quarto</option>
-      <option>Lixeira</option>
-      <option>Manteigueira</option>
-      <option>Mixer</option>
-      <option>Omeleteira</option>
-      <option>Panela de pressão</option>
-      <option>Panificadora</option>
-      <option>Panos de prato</option>
-      <option>Pegador de massa</option>
-      <option>Pegador de salada</option>
-      <option>Peneira</option>
-      <option>Pinça de cozinha</option>
-      <option>Pipoqueira</option>
-      <option>Porta copos</option>
-      <option>Porta-condimentos e temperos</option>
-      <option>Porta-facas</option>
-      <option>Porta-guardanapos</option>
-      <option>Pregador</option>
-      <option>Puxa-sacos</option>
-      <option>Quebra-nozes</option>
-      <option>Queijeira</option>
-      <option>Ralador</option>
-      <option>Sanduicheira</option>
-      <option>Suporte de detergente e esponja</option>
-      <option>Tábua de corte</option>
-      <option>Tábua de passar roupas</option>
-      <option>Taças</option>
-      <option>Tapetes</option>
-      <option>Tesoura de cozinha</option>
-      <option>Toalha de mesa</option>
-      <option>Torradeira</option>
-      <option>Travessa de vidro</option>
-      <option>Varal de chão</option>
-      <option>Vassoura, rodo e pá</option>
     </select>
 
     <button type="submit">Reservar</button>
   </form>
 
+  <div id="mensagem"></div>
+
   <script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycbzYragPlyK_7FlMCqep6MQ9xuRBvjIOHSy-HlhrWKC45iahdBEQ6w4G3zoza2uoR2TI/exec";
+    const scriptURL = "https://script.google.com/macros/s/AKfycbyVJlz_GDpAsS7TLKcbtaiTGSqLrfEupB6DjPuES_bpwaZOIfu6exh_gX0BgmhLMfY_/exec";
+
+    const todosPresentes = [
+      "Abajur", "Abridor de latas e garrafas", "Abridor de vinho e garrafas", "Afiador de facas", "Assadeira", "Batedeira",
+      "Cafeteira", "Capacho", "Cesta para pães", "Cesto de roupas", "Colher de pau", "Concha", "Cortador de legumes",
+      "Cortador de pizza", "Descascador de legumes", "Escorredor de macarrão", "Escorredor de pratos", "Escumadeira",
+      "Espátula de silicone", "Espátula", "Espremedor de frutas", "Forma de bolo", "Forma de pizza", "Forma de pudim / bolo",
+      "Frigideira", "Fruteira", "Galheteiro", "Garrafa térmica", "Guardanapos", "Jarro d'água e suco", "Jogo americano",
+      "Jogo de copos", "Jogo de facas", "Jogo de panelas", "Jogo de pratos", "Jogo de talheres", "Jogo de xícaras",
+      "Liquidificador", "Lixeira de banheiro / quarto", "Lixeira", "Manteigueira", "Mixer", "Omeleteira", "Panela de pressão",
+      "Panificadora", "Panos de prato", "Pegador de massa", "Pegador de salada", "Peneira", "Pinça de cozinha", "Pipoqueira",
+      "Porta copos", "Porta-condimentos e temperos", "Porta-facas", "Porta-guardanapos", "Pregador", "Puxa-sacos",
+      "Quebra-nozes", "Queijeira", "Ralador", "Sanduicheira", "Suporte de detergente e esponja", "Tábua de corte",
+      "Tábua de passar roupas", "Taças", "Tapetes", "Tesoura de cozinha", "Toalha de mesa", "Torradeira", "Travessa de vidro",
+      "Varal de chão", "Vassoura, rodo e pá"
+    ];
 
     let reservas = [];
 
@@ -152,12 +103,14 @@
     const form = document.getElementById('formPresente');
     const nomeInput = document.getElementById('nome');
     const presenteSelect = document.getElementById('presente');
+    const mensagemDiv = document.getElementById('mensagem');
 
     async function buscarReservas() {
       const response = await fetch(scriptURL);
       const data = await response.json();
       reservas = data;
       atualizarLista();
+      atualizarSelect();
     }
 
     function atualizarLista() {
@@ -175,6 +128,19 @@
       });
     }
 
+    function atualizarSelect() {
+      const reservados = reservas.map(r => r.presente);
+      presenteSelect.innerHTML = '<option value="">Selecione...</option>';
+      todosPresentes.forEach(p => {
+        if (!reservados.includes(p)) {
+          const option = document.createElement('option');
+          option.value = p;
+          option.textContent = p;
+          presenteSelect.appendChild(option);
+        }
+      });
+    }
+
     async function reservarPresente(nome, presente) {
       const response = await fetch(scriptURL, {
         method: 'POST',
@@ -183,7 +149,10 @@
       });
       const data = await response.json();
       if (data.result === "Sucesso!") {
+        mensagemDiv.textContent = "Presente reservado com sucesso! Obrigado 🎁";
         buscarReservas();
+      } else {
+        mensagemDiv.textContent = "Erro: " + data.result;
       }
     }
 
@@ -192,13 +161,14 @@
       const nome = nomeInput.value.trim();
       const presente = presenteSelect.value;
 
-      if (reservas.some(r => r.presente === presente)) {
-        alert('Esse presente já foi reservado!');
+      if (!presente) {
+        alert("Por favor, selecione um presente.");
         return;
       }
 
       reservarPresente(nome, presente);
       nomeInput.value = '';
+      presenteSelect.value = '';
     });
 
     buscarReservas();
