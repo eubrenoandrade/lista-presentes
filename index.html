@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -58,6 +57,10 @@
       color: blue;
       text-align: center;
     }
+    #outroPresente {
+      display: none;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
@@ -74,6 +77,11 @@
     <select id="presente" name="presente" required>
       <option value="">Selecione...</option>
     </select>
+
+    <div id="outroPresente">
+      <label for="presenteOutro">Especifique seu presente:</label>
+      <input type="text" id="presenteOutro" name="presenteOutro" />
+    </div>
 
     <button type="submit">Reservar</button>
   </form>
@@ -105,6 +113,8 @@
     const nomeInput = document.getElementById('nome');
     const presenteSelect = document.getElementById('presente');
     const mensagemDiv = document.getElementById('mensagem');
+    const outroPresenteDiv = document.getElementById('outroPresente');
+    const presenteOutroInput = document.getElementById('presenteOutro');
 
     async function buscarReservas() {
       const response = await fetch(scriptURL);
@@ -140,7 +150,21 @@
           presenteSelect.appendChild(option);
         }
       });
+
+      // Adiciona a opção "Outro"
+      const optionOutro = document.createElement('option');
+      optionOutro.value = 'Outro';
+      optionOutro.textContent = 'Outro';
+      presenteSelect.appendChild(optionOutro);
     }
+
+    presenteSelect.addEventListener('change', () => {
+      if (presenteSelect.value === 'Outro') {
+        outroPresenteDiv.style.display = 'block';
+      } else {
+        outroPresenteDiv.style.display = 'none';
+      }
+    });
 
     async function reservarPresente(nome, presente) {
       const response = await fetch(scriptURL, {
@@ -160,16 +184,26 @@
     form.addEventListener('submit', e => {
       e.preventDefault();
       const nome = nomeInput.value.trim();
-      const presente = presenteSelect.value;
+      let presente = presenteSelect.value;
 
       if (!presente) {
         alert("Por favor, selecione um presente.");
         return;
       }
 
+      if (presente === 'Outro') {
+        presente = presenteOutroInput.value.trim();
+        if (!presente) {
+          alert("Por favor, descreva o presente.");
+          return;
+        }
+      }
+
       reservarPresente(nome, presente);
       nomeInput.value = '';
       presenteSelect.value = '';
+      presenteOutroInput.value = '';
+      outroPresenteDiv.style.display = 'none';
     });
 
     buscarReservas();
